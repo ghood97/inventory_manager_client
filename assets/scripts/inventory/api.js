@@ -10,20 +10,11 @@ const signUp = (formData) => {
 }
 
 const signIn = (formData, auto) => {
-  if (auto === '') {
-    return $.ajax({
-      method: 'POST',
-      url: config.apiUrl + '/sign-in',
-      data: formData
-    })
-  } else {
-    console.log('In the else of signIn')
-    return $.ajax({
-      method: 'POST',
-      url: config.apiUrl + '/sign-in',
-      data: auto
-    })
-  }
+  return $.ajax({
+    method: 'POST',
+    url: config.apiUrl + '/sign-in',
+    data: formData
+  })
 }
 
 const signOut = () => {
