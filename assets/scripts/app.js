@@ -13,4 +13,5 @@ $(() => {
   $('.links').hide()
   $('#sign-out-btn').on('click', events.onSignOut)
   $('#products-btn').on('click', events.getProducts)
+  $('#change-pw-form').on('submit', events.onChangePassword)
 })

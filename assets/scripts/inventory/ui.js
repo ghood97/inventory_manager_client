@@ -1,4 +1,5 @@
 const store = require('../store.js')
+const productListTemplate = require('../templates/product-listing.handlebars')
 
 const successMessage = (newText) => {
   $('#status-message').text(newText)
@@ -16,8 +17,14 @@ const welcomeMessage = () => {
   successMessage('Sign-in or Sign-up to see your inventory')
 }
 
+const welcomeUserMessage = () => {
+  successMessage('This is your inventory')
+}
+
 const onProductIndexSuccess = (response) => {
-  console.log(response)
+  const productHTML = productListTemplate({products: response.products})
+  $('.products-table tbody').html('')
+  $('.products-table tbody').append(productHTML)
 }
 
 const onProductIndexFailure = (response) => {
@@ -36,6 +43,7 @@ const onSignUpFailure = (response) => {
 
 const onSignInSuccess = (response) => {
   successMessage('Signed In Successfully')
+  setTimeout(welcomeUserMessage, 1000)
   $('#sign-in-form').trigger('reset')
   store.user = response.user
   $('.sign-out-div').css('visibility', 'visible')
@@ -62,7 +70,17 @@ const onSignOutSuccess = (response) => {
 }
 
 const onSignOutFailure = (response) => {
+  failureMessage('Sign-Out failed')
+}
 
+const onChangePasswordSuccess = (response) => {
+  successMessage('Password changed successfully')
+  $('#change-pw-form').trigger('reset')
+}
+
+const onChangePasswordFailure = (response) => {
+  failureMessage('Password change failure')
+  $('#change-pw-form').trigger('reset')
 }
 
 module.exports = {
@@ -73,5 +91,7 @@ module.exports = {
   onSignOutSuccess,
   onSignOutFailure,
   onProductIndexSuccess,
-  onProductIndexFailure
+  onProductIndexFailure,
+  onChangePasswordSuccess,
+  onChangePasswordFailure
 }
