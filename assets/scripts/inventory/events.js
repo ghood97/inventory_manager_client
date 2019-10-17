@@ -3,6 +3,11 @@ const api = require('./api.js')
 const ui = require('./ui.js')
 const getFormFields = require('../../../lib/get-form-fields.js')
 
+const getProducts = (event) => {
+  event.preventDefault()
+  api.productIndex().then(ui.onProductIndexSuccess).catch(ui.onProductIndexFailure)
+}
+
 const onSignUp = (event) => {
   event.preventDefault()
   const form = event.target
@@ -33,5 +38,6 @@ module.exports = {
   onSignIn,
   onSignUp,
   onChangePassword,
-  onSignOut
+  onSignOut,
+  getProducts
 }

@@ -11,4 +11,6 @@ $(() => {
   $('#sign-in-form').on('submit', events.onSignIn)
   $('.table-div').hide()
   $('.links').hide()
+  $('#sign-out-btn').on('click', events.onSignOut)
+  $('#products-btn').on('click', events.getProducts)
 })

@@ -12,6 +12,18 @@ const failureMessage = (newText) => {
   $('#status-message').addClass('failure')
 }
 
+const welcomeMessage = () => {
+  successMessage('Sign-in or Sign-up to see your inventory')
+}
+
+const onProductIndexSuccess = (response) => {
+  console.log(response)
+}
+
+const onProductIndexFailure = (response) => {
+  console.log(response)
+}
+
 const onSignUpSuccess = (response) => {
   successMessage('Sign-Up Successful! Please Sign in to play.')
   $('#sign-up-form').trigger('reset')
@@ -24,6 +36,7 @@ const onSignUpFailure = (response) => {
 
 const onSignInSuccess = (response) => {
   successMessage('Signed In Successfully')
+  $('#sign-in-form').trigger('reset')
   store.user = response.user
   $('.sign-out-div').css('visibility', 'visible')
   $('.change-pw-div').css('visibility', 'visible')
@@ -37,9 +50,28 @@ const onSignInFailure = (response) => {
   $('#sign-in-form').trigger('reset')
 }
 
+const onSignOutSuccess = (response) => {
+  $('.sign-out-div').css('visibility', 'hidden')
+  $('.change-pw-div').css('visibility', 'hidden')
+  $('.links').hide()
+  $('.table-div').hide()
+  $('.sign-in-up-div').show()
+  successMessage('Sign-Out Successful!')
+  setTimeout(welcomeMessage, 1000)
+  delete store.user
+}
+
+const onSignOutFailure = (response) => {
+
+}
+
 module.exports = {
   onSignUpSuccess,
   onSignUpFailure,
   onSignInSuccess,
-  onSignInFailure
+  onSignInFailure,
+  onSignOutSuccess,
+  onSignOutFailure,
+  onProductIndexSuccess,
+  onProductIndexFailure
 }

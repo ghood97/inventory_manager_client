@@ -1,6 +1,16 @@
 const config = require('../config.js')
 const store = require('../store.js')
 
+const productIndex = () => {
+  return $.ajax({
+    url: config.apiUrl + '/products',
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 const signUp = (formData) => {
   return $.ajax({
     method: 'POST',
@@ -42,5 +52,6 @@ module.exports = {
   signUp,
   signIn,
   signOut,
-  changePassword
+  changePassword,
+  productIndex
 }
