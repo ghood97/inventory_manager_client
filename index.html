@@ -12,6 +12,76 @@
       <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
     </head>
     <body>
-      <h1>Browser Template</h1>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-2 pl-0 sign-out-div"><button>Sign-Out</button></div>
+          <div class="col-8"><h1>Inventix</h1></div>
+          <div class="col-2 change-pw-div d-flex justify-content-end">
+            <form id="change-pw-form" class="change-pw-form col-12">
+              <h3 id="pw-status-message" class="pw-status-message"></h3>
+              <h5 class = "form-label">Change Password</h5>
+              <p class="form-label-pw">Old Password</p>
+              <input required name="passwords[old]" type="password">
+              <p class="form-label-pw">New Password</p>
+              <input required name="passwords[new]" type="password">
+              <br />
+              <button id="change-pw-button" class="change-pw-button">Change-Password</button>
+            </form>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <h3 id="status-message" class="status-message">Sign-in or Sign-up to see your inventory</h3>
+          </div>
+        </div>
+        <div class="row sign-in-div">
+          <div class="sign-in col">
+            <form id="sign-in-form" class="sign-in-form">
+              <p class="form-label col">Email</p>
+              <input class="col-5" required name="credentials[email]" type="email">
+              <p class="form-label col">Password</p>
+              <input class="col-5" required name="credentials[password]" type="password">
+              <br />
+              <button class="sign-in-btn col-6">Sign-In</button>
+            </form>
+          </div>
+          <div class="sign-up col">
+            <form id="sign-up-form" class="sign-up-form">
+              <p class="form-label col">Email</p>
+              <input class="col-5" required id="sign-up-email" name="credentials[email]" type="email">
+              <p class="form-label col">Password</p>
+              <input class="col-5" required id="sign-up-password" name="credentials[password]" type="password">
+              <p class="form-label col">Confirm Password</p>
+              <input class="col-5" required name="credentials[password_confirmation]" type="password">
+              <br />
+              <button class="sign-up-btn col-6">Sign-Up</button>
+            </form>
+          </div>
+        </div>
+        <div class="row links">
+          <div class="my-inv-link-div col-6"><button>My Inventory</button></div>
+          <div class="products-link-div col-6"><button>Products</button></div>
+        </div>
+        <div class="row table-div">
+          <div class="mx-auto product-table-div table-responsive col-6 d-flex">
+            <table class="table table-hover products-table">
+              <thead>
+                <tr>
+                  <th scope="col">ID</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Suggested Retail Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </body>
 </html>

@@ -1,1 +1,112 @@
 @import '~bootstrap/scss/bootstrap';
+
+h1 {
+  font-weight: bold;
+  text-align: center;
+}
+
+.container-fluid {
+  border-bottom: 2px solid $black;
+}
+
+.links {
+  border-top: 4px solid $black;
+  display: none;
+  text-align: center;
+}
+
+.my-inv-link-div {
+  text-align: right;
+}
+
+.products-link-div {
+  text-align: left;
+}
+
+.table-responsive {
+  border-left: 4px solid $black;
+  border-right: 4px solid $black;
+  height: 500px;
+  overflow-y: scroll;
+}
+
+.table-div {
+  border-bottom: 4px solid $black;
+  border-top: 4px solid $black;
+  display: none;
+}
+
+.products-table {
+
+  td {
+    text-align: center;
+  }
+
+  th {
+    text-align: center;
+  }
+
+  tbody {
+    overflow-y: scroll;
+  }
+}
+
+
+.status-message {
+  text-align: center;
+}
+
+.form-label {
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 0;
+  margin-top: 20px;
+}
+
+.sign-in-div {
+  border-bottom: 2px solid $black;
+  border-top: 4px solid $black;
+}
+
+.sign-in {
+  margin: 2px;
+  padding: 2px;
+  text-align: center;
+}
+
+.sign-up {
+  margin: 2px;
+  padding: 2px;
+  text-align: center;
+}
+
+
+.sign-out-div {
+  visibility: hidden;
+}
+
+.sign-up-btn {
+  border: 2px solid $black;
+  border-radius: 30px;
+  font-size: 34px;
+  margin-top: 6px;
+}
+
+.sign-in-btn {
+  border: 2px solid $black;
+  border-radius: 30px;
+  font-size: 34px;
+  margin-top: 6px;
+}
+
+.form-label-pw {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 0;
+  margin-top: 20px;
+}
+
+.change-pw-div {
+  border: 4px solid $black;
+  visibility: hidden;
+}
