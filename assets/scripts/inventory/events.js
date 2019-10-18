@@ -1,6 +1,8 @@
 
 const api = require('./api.js')
+// onst store = require('../store.js')
 const ui = require('./ui.js')
+const methods = require('./methods.js')
 const getFormFields = require('../../../lib/get-form-fields.js')
 
 const getProducts = (event) => {
@@ -17,6 +19,15 @@ const onlookupInventory = (event) => {
   event.preventDefault()
   const inventoryId = $('#lookup-id').val()
   api.inventoryShow(inventoryId).then(ui.onLookupInventorySuccess).catch(ui.onLookupInventoryFailure)
+}
+
+const onAddItem = (event) => {
+  event.preventDefault()
+  const productId = $('#add-product-id').val()
+  const price = $('#add-product-price').val()
+  if (methods.unique(productId)) {
+    api.createInventory(productId, price).then(ui.createInventorySuccess).catch(ui.createInventoryFailure)
+  }
 }
 
 const onSignUp = (event) => {
@@ -52,5 +63,6 @@ module.exports = {
   onSignOut,
   getProducts,
   getInventory,
-  onlookupInventory
+  onlookupInventory,
+  onAddItem
 }

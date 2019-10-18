@@ -16,4 +16,5 @@ $(() => {
   $('#inventory-btn').on('click', events.getInventory)
   $('#change-pw-form').on('submit', events.onChangePassword)
   $('.lookup-form').on('submit', events.onlookupInventory)
+  $('#add-product-form').on('submit', events.onAddItem)
 })

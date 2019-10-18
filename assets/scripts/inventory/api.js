@@ -31,6 +31,23 @@ const inventoryShow = (id) => {
   })
 }
 
+const createInventory = (productId, price) => {
+  return $.ajax({
+    url: config.apiUrl + `/inventories`,
+    method: 'POST',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data: {
+      inventory: {
+        user_id: store.user.id,
+        product_id: productId,
+        price: price
+      }
+    }
+  })
+}
+
 const signUp = (formData) => {
   return $.ajax({
     method: 'POST',
@@ -75,5 +92,6 @@ module.exports = {
   changePassword,
   productIndex,
   inventoryIndex,
-  inventoryShow
+  inventoryShow,
+  createInventory
 }
