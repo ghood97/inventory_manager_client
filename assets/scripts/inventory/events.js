@@ -8,6 +8,17 @@ const getProducts = (event) => {
   api.productIndex().then(ui.onProductIndexSuccess).catch(ui.onProductIndexFailure)
 }
 
+const getInventory = (event) => {
+  event.preventDefault()
+  api.inventoryIndex().then(ui.onInventoryIndexSuccess).catch(ui.onInventoryIndexFailure)
+}
+
+const onlookupInventory = (event) => {
+  event.preventDefault()
+  const inventoryId = $('#lookup-id').val()
+  api.inventoryShow(inventoryId).then(ui.onLookupInventorySuccess).catch(ui.onLookupInventoryFailure)
+}
+
 const onSignUp = (event) => {
   event.preventDefault()
   const form = event.target
@@ -39,5 +50,7 @@ module.exports = {
   onSignUp,
   onChangePassword,
   onSignOut,
-  getProducts
+  getProducts,
+  getInventory,
+  onlookupInventory
 }

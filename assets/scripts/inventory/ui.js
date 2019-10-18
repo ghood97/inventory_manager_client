@@ -1,5 +1,7 @@
 const store = require('../store.js')
+const api = require('./api.js')
 const productListTemplate = require('../templates/product-listing.handlebars')
+const inventoryListTemplate = require('../templates/inventory-listing.handlebars')
 
 const successMessage = (newText) => {
   $('#status-message').text(newText)
@@ -13,22 +15,62 @@ const failureMessage = (newText) => {
   $('#status-message').addClass('failure')
 }
 
-const welcomeMessage = () => {
-  successMessage('Sign-in or Sign-up to see your inventory')
+const lookupSuccessMessage = (newText) => {
+  $('#lookup-status').text(newText)
+  $('#lookup-status').removeClass('failure')
+  $('#lookup-status').addClass('success')
 }
 
-const welcomeUserMessage = () => {
-  successMessage('This is your inventory')
+const lookupFailureMessage = (newText) => {
+  $('#lookup-status').text(newText)
+  $('#lookup-status').removeClass('success')
+  $('#lookup-status').addClass('failure')
+}
+
+const welcomeMessage = () => {
+  successMessage('Sign-in or Sign-up to see your inventory')
 }
 
 const onProductIndexSuccess = (response) => {
   const productHTML = productListTemplate({products: response.products})
   $('.products-table tbody').html('')
   $('.products-table tbody').append(productHTML)
+  $('#price-header').html('Suggested Retail Price')
+  successMessage('These are all of the available products ')
+  $('#lookup-status').text('')
+  $('#lookup-id').val('')
 }
 
 const onProductIndexFailure = (response) => {
-  console.log(response)
+  failureMessage('Could not retireve products. Please try again.')
+}
+
+const onInventoryIndexSuccess = (response) => {
+  const inventoryHTML = inventoryListTemplate({inventories: response.inventories})
+  $('.products-table tbody').html('')
+  $('.products-table tbody').append(inventoryHTML)
+  $('#price-header').html('Price')
+  successMessage('This is your inventory')
+  $('#lookup-status').text('')
+  $('#lookup-id').val('')
+}
+
+const onInventoryIndexFailure = (response) => {
+  failureMessage('Could not retrieve your invetory. Please try again')
+}
+
+const onLookupInventorySuccess = (response) => {
+  console.log('response: ', response)
+  lookupSuccessMessage('Inventory Lookup Success')
+  $('.lookup-table tbody').html('')
+  const inventoryHTML = inventoryListTemplate({inventories: response.inventory})
+  $('.lookup-table tbody').append(inventoryHTML)
+  $('#price-header-display').html('Price')
+}
+
+const onLookupInventoryFailure = (response) => {
+  lookupFailureMessage('Inventory Lookup Failed')
+  $('.lookup-table tbody').html('')
 }
 
 const onSignUpSuccess = (response) => {
@@ -42,15 +84,14 @@ const onSignUpFailure = (response) => {
 }
 
 const onSignInSuccess = (response) => {
-  successMessage('Signed In Successfully')
-  setTimeout(welcomeUserMessage, 1000)
-  $('#sign-in-form').trigger('reset')
   store.user = response.user
+  $('#sign-in-form').trigger('reset')
   $('.sign-out-div').css('visibility', 'visible')
   $('.change-pw-div').css('visibility', 'visible')
   $('.links').show()
   $('.table-div').show()
   $('.sign-in-up-div').hide()
+  api.inventoryIndex().then(onInventoryIndexSuccess).catch(onInventoryIndexFailure)
 }
 
 const onSignInFailure = (response) => {
@@ -64,6 +105,9 @@ const onSignOutSuccess = (response) => {
   $('.links').hide()
   $('.table-div').hide()
   $('.sign-in-up-div').show()
+  $('.products-table tbody').html('')
+  $('#lookup-status').text('')
+  $('#lookup-id').val('')
   successMessage('Sign-Out Successful!')
   setTimeout(welcomeMessage, 1000)
   delete store.user
@@ -92,6 +136,10 @@ module.exports = {
   onSignOutFailure,
   onProductIndexSuccess,
   onProductIndexFailure,
+  onInventoryIndexSuccess,
+  onInventoryIndexFailure,
   onChangePasswordSuccess,
-  onChangePasswordFailure
+  onChangePasswordFailure,
+  onLookupInventorySuccess,
+  onLookupInventoryFailure
 }

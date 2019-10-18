@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-      <title>Example</title>
+      <title>Inventix</title>
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
       <!-- Do not add `link` tags-->
@@ -63,18 +63,42 @@
           <div class="products-link-div col-6"><button id="products-btn">Products</button></div>
         </div>
         <div class="row table-div">
+          <div class="col-3">
+            <form class="lookup-form">
+              <h6 id="lookup-status" class="lookup-status"></h6>
+              <p id="lookup-label" class="lookup-label">Inventory Lookup</p>
+              <input required id="lookup-id" class="lookup-id" placeholder="Inventory ID" type="number" min="1">
+              <button type="submit" id="lookup-submit" class="lookup-submit">Lookup</button>
+            </form>
+            <div id="lookup-display">
+              <table class="table table-bordered lookup-table">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th id="price-header-display" scope="col">Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+          </div>
           <div class="mx-auto product-table-div table-responsive col-6 d-flex">
-            <table class="table table-hover products-table">
+            <table class="table table-striped table-bordered table-hover products-table">
               <thead>
                 <tr>
                   <th scope="col">ID</th>
                   <th scope="col">Name</th>
-                  <th scope="col">Suggested Retail Price</th>
+                  <th id="price-header" scope="col">Suggested Retail Price</th>
                 </tr>
               </thead>
               <tbody>
               </tbody>
             </table>
+          </div>
+          <div class="col-3">
+            <p></p>
           </div>
         </div>
       </div>

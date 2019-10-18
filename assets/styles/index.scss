@@ -31,8 +31,7 @@ h1 {
 }
 
 .table-div {
-  border-bottom: 4px solid $black;
-  border-top: 4px solid $black;
+  border: 4px solid $black;
 }
 
 .products-table {
@@ -50,6 +49,9 @@ h1 {
   }
 }
 
+.lookup-status {
+  font-weight: bold;
+}
 
 .status-message {
   color: $success-green;
@@ -61,6 +63,18 @@ h1 {
   font-weight: bold;
   margin-bottom: 0;
   margin-top: 20px;
+}
+
+.lookup-form {
+  margin-bottom: 5px;
+}
+
+.lookup-label {
+  font-weight: bold;
+}
+
+.lookup-id {
+  width: 115px;
 }
 
 .sign-in-up-div {
