@@ -31,7 +31,7 @@ const inventoryShow = (id) => {
   })
 }
 
-const createInventory = (productId, price) => {
+const inventoryCreate = (productId, price) => {
   return $.ajax({
     url: config.apiUrl + `/inventories`,
     method: 'POST',
@@ -43,6 +43,25 @@ const createInventory = (productId, price) => {
         user_id: store.user.id,
         product_id: productId,
         price: price
+      }
+    }
+  })
+}
+
+const inventoryUpdate = (inventoryId, newPrice) => {
+  const itemToUpdate = store.inventories.find(x => x.id === inventoryId)
+  const productId = itemToUpdate.product.id
+  return $.ajax({
+    url: config.apiUrl + `/inventories/${inventoryId}`,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data: {
+      inventory: {
+        user_id: store.user.id,
+        product_id: productId,
+        price: newPrice
       }
     }
   })
@@ -93,5 +112,6 @@ module.exports = {
   productIndex,
   inventoryIndex,
   inventoryShow,
-  createInventory
+  inventoryCreate,
+  inventoryUpdate
 }

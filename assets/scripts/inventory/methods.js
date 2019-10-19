@@ -1,11 +1,8 @@
-const api = require('./api.js')
+const store = require('../store.js')
 
 const unique = (productId) => {
-  console.log(api.inventoryIndex())
-//   const uniq = response.inventories.some((x) => {
-//     return x.product_id === productId
-//   })
-//   return !uniq
+  const uniq = !store.inventories.some(x => x.product_id === productId)
+  return uniq
 }
 
 module.exports = {

@@ -1,5 +1,6 @@
 const store = require('../store.js')
 const api = require('./api.js')
+const methods = require('./methods.js')
 const productListTemplate = require('../templates/product-listing.handlebars')
 const inventoryListTemplate = require('../templates/inventory-listing.handlebars')
 const inventoryShowTemplate = require('../templates/inventory-show.handlebars')
@@ -28,11 +29,24 @@ const lookupFailureMessage = (newText) => {
   $('#lookup-status').addClass('failure')
 }
 
+const updateDeleteSuccessMessage = (newText) => {
+  $('#update-delete-status').text(newText)
+  $('#update-delete-status').removeClass('failure')
+  $('#update-delete-status').addClass('success')
+}
+
+const updateDeleteFailureMessage = (newText) => {
+  $('#update-delete-status').text(newText)
+  $('#update-delete-status').removeClass('success')
+  $('#update-delete-status').addClass('failure')
+}
+
 const welcomeMessage = () => {
   successMessage('Sign-in or Sign-up to see your inventory')
 }
 
 const onProductIndexSuccess = (response) => {
+  store.products = response.products
   const productHTML = productListTemplate({products: response.products})
   $('.products-table tbody').html('')
   $('.products-table tbody').append(productHTML)
@@ -47,6 +61,9 @@ const onProductIndexSuccess = (response) => {
   $('.info-right').text('Click the "My Inventory" button to view and edit the items to your inventory, or add more products to your inventory')
   $('#add-product-form').show()
   $('#update-inventory-form').hide()
+  $('#delete-inventory-form').hide()
+  $('#update-inventory-form').trigger('reset')
+  $('#update-delete-status').html('')
 }
 
 const onProductIndexFailure = (response) => {
@@ -54,6 +71,7 @@ const onProductIndexFailure = (response) => {
 }
 
 const onInventoryIndexSuccess = (response) => {
+  store.inventories = response.inventories
   const inventoryHTML = inventoryListTemplate({inventories: response.inventories})
   successMessage('This is your inventory')
   $('.products-table tbody').html('')
@@ -68,6 +86,8 @@ const onInventoryIndexSuccess = (response) => {
   $('.info-right').text('Click the products button to add more items to your inventory, or update an existing inventory item')
   $('#add-product-form').hide()
   $('#update-inventory-form').show()
+  $('#delete-inventory-form').show()
+  $('#add-product-form').trigger('reset')
 }
 
 const onInventoryIndexFailure = (response) => {
@@ -88,13 +108,24 @@ const onLookupInventoryFailure = (response) => {
 }
 
 const onCreateInventorySuccess = (response) => {
-  successMessage('Item Added to Inventory')
   $('#add-product-form').trigger('reset')
-  api.productIndex().then(onProductIndexSuccess).catch(onProductIndexFailure)
+  api.inventoryIndex().then(successMessage('Item Added to Inventory')).catch(onInventoryIndexFailure)
 }
 
 const onCreateInventoryFailure = (response) => {
   failureMessage('Failed to add item. Please try again')
+  $('#add-product-form').trigger('reset')
+}
+
+const onInventoryUpdateSuccess = (response) => {
+  $('#update-inventory-form').trigger('reset')
+  api.inventoryIndex().then(onInventoryIndexSuccess).catch(onInventoryIndexFailure)
+  updateDeleteSuccessMessage('Update Successful')
+}
+
+const onInventoryUpdateFailure = (response) => {
+  updateDeleteSuccessMessage('Update Failed')
+  $('#update-inventory-form').trigger('reset')
 }
 
 const onSignUpSuccess = (response) => {
@@ -134,6 +165,7 @@ const onSignOutSuccess = (response) => {
   $('#lookup-id').val('')
   $('.lookup-table tbody').html('')
   successMessage('Sign-Out Successful!')
+  $('#update-delete-status').html('')
   setTimeout(welcomeMessage, 1000)
   store.inventory = true
   $('.info-right').text('Click the products button to add more items to your inventory, or update an existing inventory item')
@@ -170,5 +202,9 @@ module.exports = {
   onLookupInventorySuccess,
   onLookupInventoryFailure,
   onCreateInventorySuccess,
-  onCreateInventoryFailure
+  onCreateInventoryFailure,
+  onInventoryUpdateSuccess,
+  onInventoryUpdateFailure,
+  updateDeleteFailureMessage,
+  updateDeleteSuccessMessage
 }

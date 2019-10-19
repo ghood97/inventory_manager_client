@@ -111,17 +111,29 @@
                 </div>
                 <button id="add-product-submit" class="add-product-submit form-submit form-control col-4">Add Product</button>
               </form>
-              <form id="update-inventory-form" class="update-inventory-form">
-                <div class="form-group">
-                  <label for="update-inventory-id">Inventory ID</label>
-                  <input id="update-inventory-id" class="ipdate-inventory-id form-control col-4" required placeholder="ID" type="number" min="1">
+              <div id="update-div" class="update-div col-12">
+                <h4 id="update-delete-status"></h4>
+                <div class="row">
+                  <form id="update-inventory-form" class="update-inventory-form col-6">
+                    <div class="form-group">
+                      <label for="update-inventory-id">Inventory ID</label>
+                      <input id="update-inventory-id" class="ipdate-inventory-id form-control col-8" required placeholder="ID" type="number" min="1">
+                    </div>
+                    <div class="form-group">
+                      <label for="update-inventory-price">New Price</label>
+                      <input id="update-inventory-price" class="form-control update-inventory-price col-9" placeholder="$###.##" required type="text">
+                    </div>
+                    <button id="update-inventory-submit" class="update-inventory-submit form-submit form-control col-12">Update Item</button>
+                  </form>
+                  <form id="delete-inventory-form" class="delete-inventory-form col-6">
+                    <div class="form-group">
+                      <label for="delete-inventory-id">Inventory ID</label>
+                      <input id="delete-inventory-id" class="delete-inventory-id form-control col-8" required placeholder="ID" type="number" min="1">
+                    </div>
+                    <button id="delete-inventory-submit" class="delete-inventory-submit form-submit form-control col-12">Delete Item</button>
+                  </form>
                 </div>
-                <div class="form-group">
-                  <label for="update-inventory-price">New Price</label>
-                  <input id="update-inventory-price" class="form-control update-inventory-price col-6" placeholder="$###.##" required type="text">
-                </div>
-                <button id="update-inventory-submit" class="update-inventory-submit form-submit form-control col-4">Update Item</button>
-              </form>
+              </div>
           </div>
         </div>
       </div>

@@ -26,8 +26,15 @@ const onAddItem = (event) => {
   const productId = $('#add-product-id').val()
   const price = $('#add-product-price').val()
   if (methods.unique(productId)) {
-    api.createInventory(productId, price).then(ui.createInventorySuccess).catch(ui.createInventoryFailure)
+    api.inventoryCreate(productId, price).then(ui.onCreateInventorySuccess).catch(ui.onCreateInventoryFailure)
   }
+}
+
+const onUpdateInventory = (event) => {
+  event.preventDefault()
+  const inventoryId = parseInt($('#update-inventory-id').val())
+  const newPrice = $('#update-inventory-price').val()
+  api.inventoryUpdate(inventoryId, newPrice).then(ui.onInventoryUpdateSuccess).catch(ui.onInventoryUpdateFailure)
 }
 
 const onSignUp = (event) => {
@@ -64,5 +71,6 @@ module.exports = {
   getProducts,
   getInventory,
   onlookupInventory,
-  onAddItem
+  onAddItem,
+  onUpdateInventory
 }
