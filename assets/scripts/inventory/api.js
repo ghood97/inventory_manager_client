@@ -11,6 +11,16 @@ const productIndex = () => {
   })
 }
 
+const productShow = (productId) => {
+  return $.ajax({
+    url: config.apiUrl + `/products/${productId}`,
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 const inventoryIndex = () => {
   return $.ajax({
     url: config.apiUrl + '/inventories',
@@ -67,6 +77,16 @@ const inventoryUpdate = (inventoryId, newPrice) => {
   })
 }
 
+const inventoryDelete = (inventoryId) => {
+  return $.ajax({
+    url: config.apiUrl + `/inventories/${inventoryId}`,
+    method: 'DELETE',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 const signUp = (formData) => {
   return $.ajax({
     method: 'POST',
@@ -95,8 +115,8 @@ const signOut = () => {
 
 const changePassword = (formData) => {
   return $.ajax({
-    method: 'PATCH',
     url: config.apiUrl + '/change-password',
+    method: 'PATCH',
     headers: {
       Authorization: 'Token token=' + store.user.token
     },
@@ -113,5 +133,7 @@ module.exports = {
   inventoryIndex,
   inventoryShow,
   inventoryCreate,
-  inventoryUpdate
+  inventoryUpdate,
+  inventoryDelete,
+  productShow
 }

@@ -2,8 +2,20 @@
 @import 'variables';
 
 h1 {
+  color: $title;
+  font-family: 'Righteous', cursive;
+  font-size: 100px;
   font-weight: bold;
   text-align: center;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  background-image: linear-gradient(rgba(6, 137, 185, .2), rgba(6, 137, 185, 1));
+  height: 100%;
 }
 
 .container-fluid {

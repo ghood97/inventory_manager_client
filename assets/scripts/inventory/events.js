@@ -10,6 +10,12 @@ const getProducts = (event) => {
   api.productIndex().then(ui.onProductIndexSuccess).catch(ui.onProductIndexFailure)
 }
 
+const onLookupProduct = (event) => {
+  event.preventDefault()
+  const productId = $('#product-lookup-id').val()
+  api.productShow(productId).then(ui.onLookupProductSuccess).catch(ui.onLookupProductFailure)
+}
+
 const getInventory = (event) => {
   event.preventDefault()
   api.inventoryIndex().then(ui.onInventoryIndexSuccess).catch(ui.onInventoryIndexFailure)
@@ -17,7 +23,7 @@ const getInventory = (event) => {
 
 const onlookupInventory = (event) => {
   event.preventDefault()
-  const inventoryId = $('#lookup-id').val()
+  const inventoryId = $('#inventory-lookup-id').val()
   api.inventoryShow(inventoryId).then(ui.onLookupInventorySuccess).catch(ui.onLookupInventoryFailure)
 }
 
@@ -35,6 +41,12 @@ const onUpdateInventory = (event) => {
   const inventoryId = parseInt($('#update-inventory-id').val())
   const newPrice = $('#update-inventory-price').val()
   api.inventoryUpdate(inventoryId, newPrice).then(ui.onInventoryUpdateSuccess).catch(ui.onInventoryUpdateFailure)
+}
+
+const onDeleteInventory = (event) => {
+  event.preventDefault()
+  const inventoryId = parseInt($('#delete-inventory-id').val())
+  api.inventoryDelete(inventoryId).then(ui.onInventoryDeleteSuccess).catch(ui.onInventoryDeleteFailure)
 }
 
 const onSignUp = (event) => {
@@ -72,5 +84,7 @@ module.exports = {
   getInventory,
   onlookupInventory,
   onAddItem,
-  onUpdateInventory
+  onUpdateInventory,
+  onDeleteInventory,
+  onLookupProduct
 }

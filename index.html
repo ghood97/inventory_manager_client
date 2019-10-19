@@ -6,6 +6,7 @@
 
       <!-- Do not add `link` tags-->
       <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+      <link href="https://fonts.googleapis.com/css?family=Righteous&display=swap" rel="stylesheet">
 
       <!-- Do not add `script` tags-->
       <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
@@ -14,8 +15,8 @@
     <body>
       <div class="container-fluid">
         <div class="row">
-          <div class="col-2 pl-0 sign-out-div"><button id="sign-out-btn">Sign-Out</button></div>
-          <div class="col-8 title-div md-flex justify-content-center"><h1>Inventix</h1></div>
+          <div class="col-2 pl-0 sign-out-div"><button id="sign-out-btn" class="btn btn-danger">Sign-Out</button></div>
+          <div class="col-8 title-div md-flex justify-content-center"><h1 id="title">Inventix</h1></div>
           <div class="col-2 change-pw-div d-flex justify-content-end">
             <form id="change-pw-form" class="change-pw-form col-12">
               <h3 id="pw-status-message" class="pw-status-message"></h3>
@@ -25,7 +26,7 @@
               <p class="form-label-pw">New Password</p>
               <input required name="passwords[new]" type="password">
               <br />
-              <button id="change-pw-button" class="change-pw-button">Change-Password</button>
+              <button id="change-pw-button" class="change-pw-button btn btn-danger">Change-Password</button>
             </form>
           </div>
         </div>
@@ -42,7 +43,7 @@
               <p class="form-label col">Password</p>
               <input class="col-5" required name="credentials[password]" type="password">
               <br />
-              <button class="sign-in-btn col-6">Sign-In</button>
+              <button class="sign-in-btn col-6 btn btn-primary">Sign-In</button>
             </form>
           </div>
           <div class="sign-up col">
@@ -54,7 +55,7 @@
               <p class="form-label col">Confirm Password</p>
               <input class="col-5" required name="credentials[password_confirmation]" type="password">
               <br />
-              <button class="sign-up-btn col-6">Sign-Up</button>
+              <button class="sign-up-btn col-6 btn btn-primary">Sign-Up</button>
             </form>
           </div>s
         </div>
@@ -63,20 +64,41 @@
           <div class="products-link-div col-6"><button id="products-btn">Products</button></div>
         </div>
         <div class="row table-div">
-          <div class="col-3">
-            <form class="lookup-form">
-              <h6 id="lookup-status" class="lookup-status"></h6>
-              <p id="lookup-label" class="lookup-label">Inventory Lookup</p>
-              <input required id="lookup-id" class="lookup-id" placeholder="Inventory ID" type="number" min="1">
-              <button type="submit" id="lookup-submit" class="lookup-submit">Lookup</button>
+          <div id="inventory-lookup-div" class="col-3 inventory-lookup-div">
+            <form class="inventory-lookup-form">
+              <h6 id="inventory-lookup-status" class="inventory-lookup-status"></h6>
+              <p id="inventory-lookup-label" class="inventory-lookup-label">Inventory Lookup</p>
+              <input required id="inventory-lookup-id" class="inventory-lookup-id" placeholder="Inventory ID" type="number" min="1">
+              <button type="submit" id="inventory-lookup-submit" class="inventory-lookup-submit btn btn-success">Lookup</button>
             </form>
-            <div id="lookup-display">
-              <table class="table table-bordered lookup-table">
+            <div id="inventory-lookup-display">
+              <table class="table table-bordered inventory-lookup-table">
                 <thead>
                   <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Name</th>
                     <th id="price-header-display" scope="col">Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div id="product-lookup-div" class="col-3 product-lookup-div">
+            <form class="product-lookup-form">
+              <h6 id="product-lookup-status" class="product-lookup-status"></h6>
+              <p id="product-lookup-label" class="product-lookup-label">Product Lookup</p>
+              <input required id="product-lookup-id" class="product-lookup-id" placeholder="Product ID" type="number" min="1">
+              <button type="submit" id="product-lookup-submit" class="product-lookup-submit btn btn-success">Lookup</button>
+            </form>
+            <div id="product-lookup-display">
+              <table class="table table-bordered product-lookup-table">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th id="price-header-display" scope="col">Suggested Retail Price</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -109,7 +131,7 @@
                   <label for="add-product-price">New Price</label>
                   <input id="add-product-price" class="form-control add-product-price col-6" placeholder="$###.##" required type="text">
                 </div>
-                <button id="add-product-submit" class="add-product-submit form-submit form-control col-4">Add Product</button>
+                <button id="add-product-submit" class="add-product-submit btn btn-success form-control col-4">Add Product</button>
               </form>
               <div id="update-div" class="update-div col-12">
                 <h4 id="update-delete-status"></h4>
@@ -123,14 +145,14 @@
                       <label for="update-inventory-price">New Price</label>
                       <input id="update-inventory-price" class="form-control update-inventory-price col-9" placeholder="$###.##" required type="text">
                     </div>
-                    <button id="update-inventory-submit" class="update-inventory-submit form-submit form-control col-12">Update Item</button>
+                    <button id="update-inventory-submit" class="update-inventory-submit btn btn-success form-control col-12">Update Item</button>
                   </form>
                   <form id="delete-inventory-form" class="delete-inventory-form col-6">
                     <div class="form-group">
                       <label for="delete-inventory-id">Inventory ID</label>
                       <input id="delete-inventory-id" class="delete-inventory-id form-control col-8" required placeholder="ID" type="number" min="1">
                     </div>
-                    <button id="delete-inventory-submit" class="delete-inventory-submit form-submit form-control col-12">Delete Item</button>
+                    <button id="delete-inventory-submit" class="delete-inventory-submit btn btn-danger form-control col-12">Delete Item</button>
                   </form>
                 </div>
               </div>
