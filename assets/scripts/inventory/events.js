@@ -1,6 +1,6 @@
 
 const api = require('./api.js')
-// onst store = require('../store.js')
+const store = require('../store.js')
 const ui = require('./ui.js')
 const methods = require('./methods.js')
 const getFormFields = require('../../../lib/get-form-fields.js')
@@ -40,13 +40,23 @@ const onUpdateInventory = (event) => {
   event.preventDefault()
   const inventoryId = parseInt($('#update-inventory-id').val())
   const newPrice = $('#update-inventory-price').val()
-  api.inventoryUpdate(inventoryId, newPrice).then(ui.onInventoryUpdateSuccess).catch(ui.onInventoryUpdateFailure)
+  const itemToUpdate = store.inventories.find(x => x.id === inventoryId)
+  if (itemToUpdate) {
+    api.inventoryUpdate(inventoryId, newPrice).then(ui.onInventoryUpdateSuccess).catch(ui.onInventoryUpdateFailure)
+  } else {
+    ui.onInventoryUpdateFailure()
+  }
 }
 
 const onDeleteInventory = (event) => {
   event.preventDefault()
   const inventoryId = parseInt($('#delete-inventory-id').val())
-  api.inventoryDelete(inventoryId).then(ui.onInventoryDeleteSuccess).catch(ui.onInventoryDeleteFailure)
+  const itemToUpdate = store.inventories.find(x => x.id === inventoryId)
+  if (itemToUpdate) {
+    api.inventoryDelete(inventoryId).then(ui.onInventoryDeleteSuccess).catch(ui.onInventoryDeleteFailure)
+  } else {
+    ui.onInventoryDeleteFailure()
+  }
 }
 
 const onSignUp = (event) => {

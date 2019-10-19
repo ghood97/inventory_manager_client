@@ -159,7 +159,7 @@ const onInventoryUpdateSuccess = (response) => {
 }
 
 const onInventoryUpdateFailure = (response) => {
-  updateDeleteSuccessMessage('Update Failed')
+  updateDeleteFailureMessage('Update Failed')
   $('#update-inventory-form').trigger('reset')
 }
 
@@ -171,7 +171,7 @@ const onInventoryDeleteSuccess = (response) => {
 
 const onInventoryDeleteFailure = (response) => {
   $('#delete-inventory-form').trigger('reset')
-  updateDeleteSuccessMessage('Deletion Failed')
+  updateDeleteFailureMessage('Deletion Failed')
 }
 
 const onSignUpSuccess = (response) => {
