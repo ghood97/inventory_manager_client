@@ -1,0 +1,7 @@
+{{#each inventories as |inventory|}}
+  <tr>
+    <th scope="row">{{inventory.id}}</th>
+    <td>{{inventory.product.name}}</td>
+    <td>${{inventory.price}}</td>
+  </tr>
+{{/each}}

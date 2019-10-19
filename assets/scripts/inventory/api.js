@@ -1,6 +1,92 @@
 const config = require('../config.js')
 const store = require('../store.js')
 
+const productIndex = () => {
+  return $.ajax({
+    url: config.apiUrl + '/products',
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
+const productShow = (productId) => {
+  return $.ajax({
+    url: config.apiUrl + `/products/${productId}`,
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
+const inventoryIndex = () => {
+  return $.ajax({
+    url: config.apiUrl + '/inventories',
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
+const inventoryShow = (id) => {
+  return $.ajax({
+    url: config.apiUrl + `/inventories/${id}`,
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
+const inventoryCreate = (productId, price) => {
+  return $.ajax({
+    url: config.apiUrl + `/inventories`,
+    method: 'POST',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data: {
+      inventory: {
+        user_id: store.user.id,
+        product_id: productId,
+        price: price
+      }
+    }
+  })
+}
+
+const inventoryUpdate = (inventoryId, newPrice) => {
+  const itemToUpdate = store.inventories.find(x => x.id === inventoryId)
+  const productId = itemToUpdate.product.id
+  return $.ajax({
+    url: config.apiUrl + `/inventories/${inventoryId}`,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data: {
+      inventory: {
+        user_id: store.user.id,
+        product_id: productId,
+        price: newPrice
+      }
+    }
+  })
+}
+
+const inventoryDelete = (inventoryId) => {
+  return $.ajax({
+    url: config.apiUrl + `/inventories/${inventoryId}`,
+    method: 'DELETE',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 const signUp = (formData) => {
   return $.ajax({
     method: 'POST',
@@ -10,20 +96,11 @@ const signUp = (formData) => {
 }
 
 const signIn = (formData, auto) => {
-  if (auto === '') {
-    return $.ajax({
-      method: 'POST',
-      url: config.apiUrl + '/sign-in',
-      data: formData
-    })
-  } else {
-    console.log('In the else of signIn')
-    return $.ajax({
-      method: 'POST',
-      url: config.apiUrl + '/sign-in',
-      data: auto
-    })
-  }
+  return $.ajax({
+    method: 'POST',
+    url: config.apiUrl + '/sign-in',
+    data: formData
+  })
 }
 
 const signOut = () => {
@@ -38,8 +115,8 @@ const signOut = () => {
 
 const changePassword = (formData) => {
   return $.ajax({
-    method: 'PATCH',
     url: config.apiUrl + '/change-password',
+    method: 'PATCH',
     headers: {
       Authorization: 'Token token=' + store.user.token
     },
@@ -51,5 +128,12 @@ module.exports = {
   signUp,
   signIn,
   signOut,
-  changePassword
+  changePassword,
+  productIndex,
+  inventoryIndex,
+  inventoryShow,
+  inventoryCreate,
+  inventoryUpdate,
+  inventoryDelete,
+  productShow
 }
