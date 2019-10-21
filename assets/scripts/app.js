@@ -21,5 +21,11 @@ $(() => {
   $('#update-inventory-form').on('submit', events.onUpdateInventory)
   $('#delete-inventory-form').on('submit', events.onDeleteInventory)
   $('#change-pw-form').on('submit', events.onChangePassword)
-  $('.products-table').on('click', 'tr', events.onItemClicked)
+  $('#add-product-modal').on('show.bs.modal', function (event) {
+    const nameCell = $(event.relatedTarget)
+    console.log(nameCell)
+    const productId = $(event.relatedTarget).attr('data-product-id')
+    $('#add-product-form-modal').attr('data-product-id', productId)
+  })
+  $('#add-product-form-modal').on('submit', events.onAddProductModal)
 })

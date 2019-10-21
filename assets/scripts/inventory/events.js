@@ -59,14 +59,15 @@ const onDeleteInventory = (event) => {
   }
 }
 
-const onItemClicked = (event) => {
+const onAddProductModal = (event) => {
   event.preventDefault()
-  const row = $(event.target).parent()
-  if (row.attr('data-inventory-id')) {
-    $('#update-inventory-pop-up').show()
-  } else {
-    console.log('product')
+  const productId = $(event.target).attr('data-product-id')
+  const price = $('#add-product-price-modal').val()
+  if (methods.unique(productId)) {
+    api.inventoryCreate(productId, price).then(ui.onCreateInventorySuccess).catch(ui.onCreateInventoryFailure)
   }
+  $('#add-product-form-modal').trigger('reset')
+  $('#add-product-modal').modal('toggle')
 }
 
 const onSignUp = (event) => {
@@ -107,5 +108,5 @@ module.exports = {
   onUpdateInventory,
   onDeleteInventory,
   onLookupProduct,
-  onItemClicked
+  onAddProductModal
 }
