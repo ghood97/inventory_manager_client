@@ -21,4 +21,5 @@ $(() => {
   $('#update-inventory-form').on('submit', events.onUpdateInventory)
   $('#delete-inventory-form').on('submit', events.onDeleteInventory)
   $('#change-pw-form').on('submit', events.onChangePassword)
+  $('.products-table').on('click', 'tr', events.onItemClicked)
 })

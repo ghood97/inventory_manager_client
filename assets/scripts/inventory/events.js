@@ -59,6 +59,16 @@ const onDeleteInventory = (event) => {
   }
 }
 
+const onItemClicked = (event) => {
+  event.preventDefault()
+  const row = $(event.target).parent()
+  if (row.attr('data-inventory-id')) {
+    $('#update-inventory-pop-up').show()
+  } else {
+    console.log('product')
+  }
+}
+
 const onSignUp = (event) => {
   event.preventDefault()
   const form = event.target
@@ -96,5 +106,6 @@ module.exports = {
   onAddItem,
   onUpdateInventory,
   onDeleteInventory,
-  onLookupProduct
+  onLookupProduct,
+  onItemClicked
 }
