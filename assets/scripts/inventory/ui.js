@@ -175,7 +175,7 @@ const onInventoryDeleteFailure = (response) => {
 }
 
 const onSignUpSuccess = (response) => {
-  successMessage('Sign-Up Successful! Please Sign in to play.')
+  successMessage('Sign-Up Successful! Please Sign in to see your inventory.')
   $('#sign-up-form').trigger('reset')
 }
 
