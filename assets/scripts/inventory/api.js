@@ -95,7 +95,7 @@ const signUp = (formData) => {
   })
 }
 
-const signIn = (formData, auto) => {
+const signIn = (formData) => {
   return $.ajax({
     method: 'POST',
     url: config.apiUrl + '/sign-in',

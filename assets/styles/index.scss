@@ -15,7 +15,12 @@ html {
 
 body {
   background-image: linear-gradient(rgba(6, 137, 185, .2), rgba(6, 137, 185, 1));
+  background-size: cover;
   height: 100%;
+}
+
+.btn {
+  font-size: 1rem;
 }
 
 .container-fluid {
@@ -155,6 +160,10 @@ body {
 .change-pw-div {
   border: 4px solid $black;
   visibility: hidden;
+}
+
+.change-pw-button {
+  margin-top: 3px;
 }
 
 .success {
