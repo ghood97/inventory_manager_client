@@ -21,4 +21,22 @@ $(() => {
   $('#update-inventory-form').on('submit', events.onUpdateInventory)
   $('#delete-inventory-form').on('submit', events.onDeleteInventory)
   $('#change-pw-form').on('submit', events.onChangePassword)
+  // Add Product modal
+  $('#add-product-modal').on('show.bs.modal', event => {
+    const productId = $(event.relatedTarget).attr('data-product-id')
+    const productName = $(event.relatedTarget).attr('data-product-name')
+    $('#add-product-modal .modal-title').text(productName)
+    $('#add-product-form-modal').attr('data-product-id', productId)
+  })
+  $('#add-product-form-modal').on('submit', events.onAddProductModal)
+  // Update inventory modal
+  $('#update-inventory-modal').on('show.bs.modal', event => {
+    const inventoryId = $(event.relatedTarget).data('inventory-id')
+    const productId = $(event.relatedTarget).data('product-id')
+    const productName = $(event.relatedTarget).attr('data-product-name')
+    $('#update-inventory-modal .modal-title').text(productName)
+    $('#update-inventory-form-modal').attr('data-inventory-id', inventoryId)
+    $('#update-inventory-form-modal').attr('data-product-id', productId)
+  })
+  $('#update-inventory-form-modal').on('submit', events.onUpdateInventoryModal)
 })

@@ -82,7 +82,7 @@ const onProductIndexSuccess = (response) => {
   $('#inventory-lookup-id').val('')
   $('.inventory-lookup-table tbody').html('')
   store.inventory = false
-  $('.info-right').text('Click the "My Inventory" button to view and edit the items to your inventory, or add more products to your inventory')
+  $('.info-right').text('Click the "My Inventory" button to view and edit the items to your inventory, or add more products to your inventory below')
   $('#add-product-form').show()
   $('#update-inventory-form').hide()
   $('#delete-inventory-form').hide()
@@ -119,7 +119,7 @@ const onInventoryIndexSuccess = (response) => {
   $('#product-lookup-id').val('')
   $('.product-lookup-table tbody').html('')
   store.inventory = true
-  $('.info-right').text('Click the products button to add more items to your inventory, or update an existing inventory item')
+  $('.info-right').text('Click the products button to add more items to your inventory, or update an existing inventory item below')
   $('#add-product-form').hide()
   $('#update-inventory-form').show()
   $('#delete-inventory-form').show()
@@ -225,9 +225,16 @@ const onSignOutSuccess = (response) => {
   $('#pw-status-message').text('')
   $('#change-pw-form').trigger('reset')
   $('#update-delete-status').html('')
+  $('#product-lookup-id').val('')
+  $('.product-lookup-table tbody').html('')
+  $('#inventory-lookup-id').val('')
+  $('.inventory-lookup-table tbody').html('')
+  $('#update-inventory-form').trigger('reset')
+  $('#delete-inventory-form').trigger('reset')
+  $('#add-product-form').trigger('reset')
   setTimeout(welcomeMessage, 1000)
   store.inventory = true
-  $('.info-right').text('Click the products button to add more items to your inventory, or update an existing inventory item')
+  $('.info-right').text('Click the products button to add more items to your inventory, or update an existing inventory item below')
   delete store.user
 }
 
