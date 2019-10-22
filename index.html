@@ -22,9 +22,9 @@
               <h3 id="pw-status-message" class="pw-status-message"></h3>
               <h5 class = "form-label">Change Password</h5>
               <p class="form-label-pw">Old Password</p>
-              <input required name="passwords[old]" type="password">
+              <input class="col-10" required name="passwords[old]" type="password">
               <p class="form-label-pw">New Password</p>
-              <input required name="passwords[new]" type="password">
+              <input class="col-10" required name="passwords[new]" type="password">
               <br />
               <button id="change-pw-button" class="change-pw-button btn btn-danger">Change-Password</button>
             </form>
@@ -68,7 +68,7 @@
             <form class="inventory-lookup-form">
               <h6 id="inventory-lookup-status" class="inventory-lookup-status"></h6>
               <p id="inventory-lookup-label" class="inventory-lookup-label">Inventory Lookup</p>
-              <input required id="inventory-lookup-id" class="inventory-lookup-id" placeholder="Inventory ID" type="number" min="1">
+              <input required id="inventory-lookup-id" class="inventory-lookup-id col-4" placeholder="ID" type="number" min="1">
               <button type="submit" id="inventory-lookup-submit" class="inventory-lookup-submit btn btn-success">Lookup</button>
             </form>
             <div id="inventory-lookup-display">
