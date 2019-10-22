@@ -1,5 +1,5 @@
 {{#each products as |product|}}
-  <tr>
+  <tr data-product-id={{product.id}} data-product-name="{{product.name}}" data-toggle="modal" data-target="#add-product-modal">
     <th scope="row">{{product.id}}</th>
     <td>{{product.name}}</td>
     <td>${{product.retail_price}}</td>

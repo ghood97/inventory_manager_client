@@ -57,11 +57,52 @@
               <br />
               <button class="sign-up-btn col-6 btn btn-primary">Sign-Up</button>
             </form>
-          </div>s
+          </div>
         </div>
         <div class="row links">
           <div class="my-inv-link-div col-6"><button id="inventory-btn">My Inventory</button></div>
           <div class="products-link-div col-6"><button id="products-btn">Products</button></div>
+        </div>
+        <div id="update-inventory-modal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title"></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                <form id="update-inventory-form-modal" class="update-inventory-form-modal">
+                  <div class="form-group">
+                    <label for="update-inventory-price-modal">New Price</label>
+                    <input id="update-inventory-price-modal" class="form-control update-inventory-price-modal col-6" placeholder="$###.##" required type="text">
+                  </div>
+                  <button id="update-inventory-submit-modal" class="update-inventory-submit-modal btn btn-success form-control col-8">Update</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="add-product-modal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title"></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                <form id="add-product-form-modal" class="add-product-form-modal">
+                  <div class="form-group">
+                    <label for="add-product-price-modal">New Price</label>
+                    <input id="add-product-price-modal" class="form-control add-product-price-modal col-6" placeholder="$###.##" required type="text">
+                  </div>
+                  <button id="add-product-submit-modal" class="add-product-submit-modal btn btn-success form-control col-8">Add Product</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
         </div>
         <div class="row table-div">
           <div id="inventory-lookup-div" class="col-3 inventory-lookup-div">
@@ -120,7 +161,7 @@
             </table>
           </div>
           <div class="col-3">
-            <h2 class="info-right">Click the products button to add more items to your inventory or update an existing inventory item</h2>
+            <h4 class="info-right">Click the products button to add more items to your inventory or update an existing inventory item below</h4>
             <hr />
               <form id="add-product-form" class="add-product-form">
                 <div class="form-group">

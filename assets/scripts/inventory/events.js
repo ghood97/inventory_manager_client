@@ -42,7 +42,8 @@ const onUpdateInventory = (event) => {
   const newPrice = $('#update-inventory-price').val()
   const itemToUpdate = store.inventories.find(x => x.id === inventoryId)
   if (itemToUpdate) {
-    api.inventoryUpdate(inventoryId, newPrice).then(ui.onInventoryUpdateSuccess).catch(ui.onInventoryUpdateFailure)
+    const productId = itemToUpdate.product.id
+    api.inventoryUpdate(inventoryId, productId, newPrice).then(ui.onInventoryUpdateSuccess).catch(ui.onInventoryUpdateFailure)
   } else {
     ui.onInventoryUpdateFailure()
   }
@@ -57,6 +58,27 @@ const onDeleteInventory = (event) => {
   } else {
     ui.onInventoryDeleteFailure()
   }
+}
+
+const onAddProductModal = (event) => {
+  event.preventDefault()
+  const productId = $(event.target).attr('data-product-id')
+  const price = $('#add-product-price-modal').val()
+  if (methods.unique(productId)) {
+    api.inventoryCreate(productId, price).then(ui.onCreateInventorySuccess).catch(ui.onCreateInventoryFailure)
+  }
+  $('#add-product-form-modal').trigger('reset')
+  $('#add-product-modal').modal('toggle')
+}
+
+const onUpdateInventoryModal = (event) => {
+  event.preventDefault()
+  const inventoryId = $(event.target).data('inventory-id')
+  const productId = $(event.target).data('product-id')
+  const price = $('#update-inventory-price-modal').val()
+  api.inventoryUpdate(inventoryId, productId, price).then(ui.onInventoryUpdateSuccess).catch(ui.onInventoryUpdateFailure)
+  $('#update-inventory-form-modal').trigger('reset')
+  $('#update-inventory-modal').modal('toggle')
 }
 
 const onSignUp = (event) => {
@@ -96,5 +118,7 @@ module.exports = {
   onAddItem,
   onUpdateInventory,
   onDeleteInventory,
-  onLookupProduct
+  onLookupProduct,
+  onAddProductModal,
+  onUpdateInventoryModal
 }

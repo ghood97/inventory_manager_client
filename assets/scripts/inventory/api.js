@@ -58,9 +58,7 @@ const inventoryCreate = (productId, price) => {
   })
 }
 
-const inventoryUpdate = (inventoryId, newPrice) => {
-  const itemToUpdate = store.inventories.find(x => x.id === inventoryId)
-  const productId = itemToUpdate.product.id
+const inventoryUpdate = (inventoryId, productId, newPrice) => {
   return $.ajax({
     url: config.apiUrl + `/inventories/${inventoryId}`,
     method: 'PATCH',
