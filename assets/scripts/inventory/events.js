@@ -42,7 +42,8 @@ const onUpdateInventory = (event) => {
   const newPrice = $('#update-inventory-price').val()
   const itemToUpdate = store.inventories.find(x => x.id === inventoryId)
   if (itemToUpdate) {
-    api.inventoryUpdate(inventoryId, newPrice).then(ui.onInventoryUpdateSuccess).catch(ui.onInventoryUpdateFailure)
+    const productId = itemToUpdate.product.id
+    api.inventoryUpdate(inventoryId, productId, newPrice).then(ui.onInventoryUpdateSuccess).catch(ui.onInventoryUpdateFailure)
   } else {
     ui.onInventoryUpdateFailure()
   }
@@ -68,6 +69,16 @@ const onAddProductModal = (event) => {
   }
   $('#add-product-form-modal').trigger('reset')
   $('#add-product-modal').modal('toggle')
+}
+
+const onUpdateInventoryModal = (event) => {
+  event.preventDefault()
+  const inventoryId = $(event.target).data('inventory-id')
+  const productId = $(event.target).data('product-id')
+  const price = $('#update-inventory-price-modal').val()
+  api.inventoryUpdate(inventoryId, productId, price).then(ui.onInventoryUpdateSuccess).catch(ui.onInventoryUpdateFailure)
+  $('#update-inventory-form-modal').trigger('reset')
+  $('#update-inventory-modal').modal('toggle')
 }
 
 const onSignUp = (event) => {
@@ -108,5 +119,6 @@ module.exports = {
   onUpdateInventory,
   onDeleteInventory,
   onLookupProduct,
-  onAddProductModal
+  onAddProductModal,
+  onUpdateInventoryModal
 }
