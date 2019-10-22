@@ -175,7 +175,15 @@ const onInventoryDeleteFailure = (response) => {
 }
 
 const onSignUpSuccess = (response) => {
-  successMessage('Sign-Up Successful! Please Sign in to see your inventory.')
+  const passwordInput = $('#sign-up-password').val()
+  const emailInput = $('#sign-up-email').val()
+  const creds = {
+    'credentials': {
+      'email': `${emailInput}`,
+      'password': `${passwordInput}`
+    }
+  }
+  api.signIn(creds).then(onSignInSuccess).catch(onSignInFailure)
   $('#sign-up-form').trigger('reset')
 }
 
