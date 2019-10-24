@@ -17,9 +17,6 @@ $(() => {
   $('#change-pw-form').on('submit', events.onChangePassword)
   $('.inventory-lookup-form').on('submit', events.onlookupInventory)
   $('.product-lookup-form').on('submit', events.onLookupProduct)
-  $('#add-product-form').on('submit', events.onAddItem)
-  $('#update-inventory-form').on('submit', events.onUpdateInventory)
-  $('#delete-inventory-form').on('submit', events.onDeleteInventory)
   $('#change-pw-form').on('submit', events.onChangePassword)
   // Add Product modal
   $('#add-product-modal').on('show.bs.modal', event => {
@@ -33,10 +30,12 @@ $(() => {
   $('#update-inventory-modal').on('show.bs.modal', event => {
     const inventoryId = $(event.relatedTarget).data('inventory-id')
     const productId = $(event.relatedTarget).data('product-id')
-    const productName = $(event.relatedTarget).attr('data-product-name')
+    const productName = $(event.relatedTarget).data('product-name')
     $('#update-inventory-modal .modal-title').text(productName)
-    $('#update-inventory-form-modal').attr('data-inventory-id', inventoryId)
-    $('#update-inventory-form-modal').attr('data-product-id', productId)
+    $('#update-inventory-form-modal').data('inventory-id', inventoryId)
+    $('#update-inventory-form-modal').data('product-id', productId)
+    $('#delete-inventory-form-modal').data('inventory-id', inventoryId)
   })
   $('#update-inventory-form-modal').on('submit', events.onUpdateInventoryModal)
+  $('#delete-inventory-form-modal').on('submit', events.onDeleteInventoryModal)
 })

@@ -82,11 +82,8 @@ const onProductIndexSuccess = (response) => {
   $('#inventory-lookup-id').val('')
   $('.inventory-lookup-table tbody').html('')
   store.inventory = false
-  $('.info-right').text('Click the "My Inventory" button to view and edit the items to your inventory, or add more products to your inventory below')
-  $('#add-product-form').show()
-  $('#update-inventory-form').hide()
+  $('.info-right').text('Click the "My Inventory" button to view and edit the items to your inventory, or click a product to add it to your inventory')
   $('#delete-inventory-form').hide()
-  $('#update-inventory-form').trigger('reset')
   $('#update-delete-status').html('')
 }
 
@@ -119,11 +116,8 @@ const onInventoryIndexSuccess = (response) => {
   $('#product-lookup-id').val('')
   $('.product-lookup-table tbody').html('')
   store.inventory = true
-  $('.info-right').text('Click the products button to add more items to your inventory, or update an existing inventory item below')
-  $('#add-product-form').hide()
-  $('#update-inventory-form').show()
+  $('.info-right').text('Click the "Products" button to add more items to your inventory, or click an item to update your existing inventory')
   $('#delete-inventory-form').show()
-  $('#add-product-form').trigger('reset')
 }
 
 const onInventoryIndexFailure = (response) => {
@@ -143,34 +137,32 @@ const onLookupInventoryFailure = (response) => {
 }
 
 const onCreateInventorySuccess = (response) => {
-  $('#add-product-form').trigger('reset')
   api.inventoryIndex().then(successMessage('Item Added to Inventory')).catch(onInventoryIndexFailure)
 }
 
 const onCreateInventoryFailure = (response) => {
   failureMessage('Failed to add item. Please try again')
-  $('#add-product-form').trigger('reset')
 }
 
 const onInventoryUpdateSuccess = (response) => {
-  $('#update-inventory-form').trigger('reset')
   api.inventoryIndex().then(onInventoryIndexSuccess).catch(onInventoryIndexFailure)
   updateDeleteSuccessMessage('Update Successful')
 }
 
 const onInventoryUpdateFailure = (response) => {
   updateDeleteFailureMessage('Update Failed')
-  $('#update-inventory-form').trigger('reset')
 }
 
 const onInventoryDeleteSuccess = (response) => {
-  $('#delete-inventory-form').trigger('reset')
+  $('#delete-inventory-form-modal').trigger('reset')
+  $('#update-inventory-form-modal').trigger('reset')
   api.inventoryIndex().then(onInventoryIndexSuccess).catch(onInventoryIndexFailure)
   updateDeleteSuccessMessage('Deletion Successful')
 }
 
 const onInventoryDeleteFailure = (response) => {
-  $('#delete-inventory-form').trigger('reset')
+  $('#delete-inventory-form-modal').trigger('reset')
+  $('#update-inventory-form-modal').trigger('reset')
   updateDeleteFailureMessage('Deletion Failed')
 }
 
@@ -229,9 +221,7 @@ const onSignOutSuccess = (response) => {
   $('.product-lookup-table tbody').html('')
   $('#inventory-lookup-id').val('')
   $('.inventory-lookup-table tbody').html('')
-  $('#update-inventory-form').trigger('reset')
   $('#delete-inventory-form').trigger('reset')
-  $('#add-product-form').trigger('reset')
   setTimeout(welcomeMessage, 1000)
   store.inventory = true
   $('.info-right').text('Click the products button to add more items to your inventory, or update an existing inventory item below')

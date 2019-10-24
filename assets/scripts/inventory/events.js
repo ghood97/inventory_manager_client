@@ -27,39 +27,6 @@ const onlookupInventory = (event) => {
   api.inventoryShow(inventoryId).then(ui.onLookupInventorySuccess).catch(ui.onLookupInventoryFailure)
 }
 
-const onAddItem = (event) => {
-  event.preventDefault()
-  const productId = $('#add-product-id').val()
-  const price = $('#add-product-price').val()
-  if (methods.unique(productId)) {
-    api.inventoryCreate(productId, price).then(ui.onCreateInventorySuccess).catch(ui.onCreateInventoryFailure)
-  }
-}
-
-const onUpdateInventory = (event) => {
-  event.preventDefault()
-  const inventoryId = parseInt($('#update-inventory-id').val())
-  const newPrice = $('#update-inventory-price').val()
-  const itemToUpdate = store.inventories.find(x => x.id === inventoryId)
-  if (itemToUpdate) {
-    const productId = itemToUpdate.product.id
-    api.inventoryUpdate(inventoryId, productId, newPrice).then(ui.onInventoryUpdateSuccess).catch(ui.onInventoryUpdateFailure)
-  } else {
-    ui.onInventoryUpdateFailure()
-  }
-}
-
-const onDeleteInventory = (event) => {
-  event.preventDefault()
-  const inventoryId = parseInt($('#delete-inventory-id').val())
-  const itemToUpdate = store.inventories.find(x => x.id === inventoryId)
-  if (itemToUpdate) {
-    api.inventoryDelete(inventoryId).then(ui.onInventoryDeleteSuccess).catch(ui.onInventoryDeleteFailure)
-  } else {
-    ui.onInventoryDeleteFailure()
-  }
-}
-
 const onAddProductModal = (event) => {
   event.preventDefault()
   const productId = $(event.target).attr('data-product-id')
@@ -79,6 +46,18 @@ const onUpdateInventoryModal = (event) => {
   api.inventoryUpdate(inventoryId, productId, price).then(ui.onInventoryUpdateSuccess).catch(ui.onInventoryUpdateFailure)
   $('#update-inventory-form-modal').trigger('reset')
   $('#update-inventory-modal').modal('toggle')
+}
+
+const onDeleteInventoryModal = (event) => {
+  event.preventDefault()
+  $('#update-inventory-modal').modal('toggle')
+  const inventoryId = $(event.target).data('inventory-id')
+  const itemToUpdate = store.inventories.find(x => x.id === inventoryId)
+  if (itemToUpdate) {
+    api.inventoryDelete(inventoryId).then(ui.onInventoryDeleteSuccess).catch(ui.onInventoryDeleteFailure)
+  } else {
+    ui.onInventoryDeleteFailure()
+  }
 }
 
 const onSignUp = (event) => {
@@ -115,10 +94,8 @@ module.exports = {
   getProducts,
   getInventory,
   onlookupInventory,
-  onAddItem,
-  onUpdateInventory,
-  onDeleteInventory,
   onLookupProduct,
   onAddProductModal,
-  onUpdateInventoryModal
+  onUpdateInventoryModal,
+  onDeleteInventoryModal
 }

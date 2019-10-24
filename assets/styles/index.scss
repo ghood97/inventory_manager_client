@@ -70,15 +70,6 @@ body {
   }
 }
 
-.add-product-form {
-  display: none;
-
-  input {
-    color: $black;
-    font-weight: bold;
-  }
-}
-
 .form-submit {
   background-color: $dark-grey;
   color: $black;
@@ -94,6 +85,12 @@ body {
 
 .status-message {
   color: $success-green;
+  text-align: center;
+}
+
+.update-delete-status {
+  color: $success-green;
+  font-weight: bolder;
   text-align: center;
 }
 
