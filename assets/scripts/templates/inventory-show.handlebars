@@ -1,5 +1,17 @@
-<tr>
-  <th scope="row">{{inventory.id}}</th>
-  <td>{{inventory.product.name}}</td>
-  <td>${{inventory.price}}</td>
-</tr>
+
+<table class="table table-bordered inventory-lookup-table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th id="price-header-display" scope="col">Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">{{inventory.id}}</th>
+      <td>{{inventory.product.name}}</td>
+      <td>${{inventory.price}}</td>
+    </tr>
+  </tbody>
+</table>

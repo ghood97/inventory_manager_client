@@ -23,8 +23,8 @@ const getInventory = (event) => {
 
 const onlookupInventory = (event) => {
   event.preventDefault()
-  const inventoryId = $('#inventory-lookup-id').val()
-  api.inventoryShow(inventoryId).then(ui.onLookupInventorySuccess).catch(ui.onLookupInventoryFailure)
+  const name = $('#inventory-lookup-name').val()
+  api.inventoryShow(name).then(ui.onLookupInventorySuccess).catch(ui.onLookupInventoryFailure)
 }
 
 const onAddProductModal = (event) => {

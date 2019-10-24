@@ -31,9 +31,9 @@ const inventoryIndex = () => {
   })
 }
 
-const inventoryShow = (id) => {
+const inventoryShow = (name) => {
   return $.ajax({
-    url: config.apiUrl + `/inventories/${id}`,
+    url: config.apiUrl + `/inventories/?name=${name}`,
     method: 'GET',
     headers: {
       Authorization: 'Token token=' + store.user.token

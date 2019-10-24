@@ -79,8 +79,8 @@ const onProductIndexSuccess = (response) => {
   $('#inventory-lookup-status').text('')
   $('#product-lookup-div').show()
   $('#inventory-lookup-div').hide()
-  $('#inventory-lookup-id').val('')
-  $('.inventory-lookup-table tbody').html('')
+  $('#inventory-lookup-name').val('')
+  $('#inventory-lookup-display').html('')
   store.inventory = false
   $('.info-right').text('Click the "My Inventory" button to view and edit the items to your inventory, or click a product to add it to your inventory')
   $('#delete-inventory-form').hide()
@@ -127,13 +127,13 @@ const onInventoryIndexFailure = (response) => {
 const onLookupInventorySuccess = (response) => {
   const inventoryHTML = inventoryShowTemplate({inventory: response.inventory})
   inventoryLookupSuccessMessage('Inventory Lookup Success')
-  $('.inventory-lookup-table tbody').html('')
-  $('.inventory-lookup-table tbody').append(inventoryHTML)
+  $('#inventory-lookup-display').html('')
+  $('#inventory-lookup-display').append(inventoryHTML)
 }
 
 const onLookupInventoryFailure = (response) => {
   inventoryLookupFailureMessage('Inventory Lookup Failed')
-  $('.inventory-lookup-table tbody').html('')
+  $('#inventory-lookup-display').html('')
 }
 
 const onCreateInventorySuccess = (response) => {
@@ -219,8 +219,8 @@ const onSignOutSuccess = (response) => {
   $('#update-delete-status').html('')
   $('#product-lookup-id').val('')
   $('.product-lookup-table tbody').html('')
-  $('#inventory-lookup-id').val('')
-  $('.inventory-lookup-table tbody').html('')
+  $('#inventory-lookup-name').val('')
+  $('#inventory-lookup-display').html('')
   $('#delete-inventory-form').trigger('reset')
   setTimeout(welcomeMessage, 1000)
   store.inventory = true
