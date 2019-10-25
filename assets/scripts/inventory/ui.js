@@ -125,10 +125,15 @@ const onInventoryIndexFailure = (response) => {
 }
 
 const onLookupInventorySuccess = (response) => {
-  const inventoryHTML = inventoryShowTemplate({inventory: response.inventory})
-  inventoryLookupSuccessMessage('Inventory Lookup Success')
-  $('#inventory-lookup-display').html('')
-  $('#inventory-lookup-display').append(inventoryHTML)
+  if (jQuery.isEmptyObject(response)) {
+    inventoryLookupFailureMessage(`Search returned 0 results`)
+    $('#inventory-lookup-display').html('')
+  } else {
+    const inventoryHTML = inventoryShowTemplate({inventories: response.inventories})
+    inventoryLookupSuccessMessage(`Search returned ${response.inventories.length} result(s)`)
+    $('#inventory-lookup-display').html('')
+    $('#inventory-lookup-display').append(inventoryHTML)
+  }
 }
 
 const onLookupInventoryFailure = (response) => {
