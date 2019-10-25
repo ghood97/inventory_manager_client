@@ -12,8 +12,8 @@ const getProducts = (event) => {
 
 const onLookupProduct = (event) => {
   event.preventDefault()
-  const productId = $('#product-lookup-id').val()
-  api.productShow(productId).then(ui.onLookupProductSuccess).catch(ui.onLookupProductFailure)
+  const name = $('#product-lookup-name').val()
+  api.productSearch(name).then(ui.onLookupProductSuccess).catch(ui.onLookupProductFailure)
 }
 
 const getInventory = (event) => {
@@ -24,7 +24,7 @@ const getInventory = (event) => {
 const onlookupInventory = (event) => {
   event.preventDefault()
   const name = $('#inventory-lookup-name').val()
-  api.inventoryShow(name).then(ui.onLookupInventorySuccess).catch(ui.onLookupInventoryFailure)
+  api.inventorySearch(name).then(ui.onLookupInventorySuccess).catch(ui.onLookupInventoryFailure)
 }
 
 const onAddProductModal = (event) => {

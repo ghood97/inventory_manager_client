@@ -116,33 +116,22 @@
               <input required id="inventory-lookup-name" class="inventory-lookup-name col-4" placeholder="Search" type="text">
               <button type="submit" id="inventory-lookup-submit" class="inventory-lookup-submit btn btn-success">Lookup</button>
             </form>
-            <div id="inventory-lookup-display">
+            <div id="inventory-lookup-display" class="display-table">
             </div>
           </div>
           <div id="product-lookup-div" class="col-3 product-lookup-div">
             <form class="product-lookup-form">
               <h6 id="product-lookup-status" class="product-lookup-status"></h6>
               <p id="product-lookup-label" class="product-lookup-label">Product Lookup</p>
-              <input required id="product-lookup-id" class="product-lookup-id" placeholder="Product ID" type="number" min="1">
+              <input required id="product-lookup-name" class="product-lookup-name col-4" placeholder="Search" type="text">
               <button type="submit" id="product-lookup-submit" class="product-lookup-submit btn btn-success">Lookup</button>
             </form>
-            <div id="product-lookup-display">
-              <table class="table table-bordered product-lookup-table">
-                <thead>
-                  <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Name</th>
-                    <th id="price-header-display" scope="col">Suggested Retail Price</th>
-                  </tr>
-                </thead>
-                <tbody>
-                </tbody>
-              </table>
+            <div id="product-lookup-display" class="display-table">
             </div>
           </div>
           <div class="mx-auto product-table-div table-responsive col-6 d-flex">
             <table class="table table-striped table-bordered table-hover products-table">
-              <thead>
+              <thead class="thead-dark">
                 <tr>
                   <th scope="col">ID</th>
                   <th scope="col">Name</th>

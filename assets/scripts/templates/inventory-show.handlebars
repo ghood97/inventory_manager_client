@@ -1,6 +1,6 @@
 
-<table class="table table-bordered inventory-lookup-table">
-  <thead>
+<table class="table table-striped table-bordered table-hover inventory-lookup-table">
+  <thead class="thead-dark">
     <tr>
       <th scope="col">ID</th>
       <th scope="col">Name</th>
@@ -9,7 +9,7 @@
   </thead>
   <tbody>
   {{#each inventories as |inventory|}}
-    <tr>
+    <tr data-product-id={{inventory.product.id}} data-inventory-id={{inventory.id}} data-product-name="{{inventory.product.name}}" data-toggle="modal" data-target="#update-inventory-modal">
       <th scope="row">{{inventory.id}}</th>
       <td>{{inventory.product.name}}</td>
       <td>${{inventory.price}}</td>

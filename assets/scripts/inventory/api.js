@@ -11,9 +11,9 @@ const productIndex = () => {
   })
 }
 
-const productShow = (productId) => {
+const productSearch = (name) => {
   return $.ajax({
-    url: config.apiUrl + `/products/${productId}`,
+    url: config.apiUrl + `/products/?name=${name}`,
     method: 'GET',
     headers: {
       Authorization: 'Token token=' + store.user.token
@@ -31,7 +31,7 @@ const inventoryIndex = () => {
   })
 }
 
-const inventoryShow = (name) => {
+const inventorySearch = (name) => {
   return $.ajax({
     url: config.apiUrl + `/inventories/?name=${name}`,
     method: 'GET',
@@ -129,9 +129,9 @@ module.exports = {
   changePassword,
   productIndex,
   inventoryIndex,
-  inventoryShow,
+  inventorySearch,
   inventoryCreate,
   inventoryUpdate,
   inventoryDelete,
-  productShow
+  productSearch
 }

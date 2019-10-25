@@ -92,15 +92,21 @@ const onProductIndexFailure = (response) => {
 }
 
 const onLookupProductSuccess = (response) => {
-  const productHTML = productShowTemplate({product: response.product})
-  productLookupSuccessMessage('Product Lookup Success')
-  $('.product-lookup-table tbody').html('')
-  $('.product-lookup-table tbody').append(productHTML)
+  if (jQuery.isEmptyObject(response)) {
+    productLookupFailureMessage('Search returned 0 results')
+    $('#product-lookup-display').html('')
+  } else {
+    const productHTML = productShowTemplate({products: response.products})
+    productLookupSuccessMessage(`Search returned ${response.products.length} result(s)`)
+    $('#product-lookup-display').html('')
+    $('#product-lookup-display').append(productHTML)
+    $('#inventory-lookup-form').trigger('reset')
+  }
 }
 
 const onLookupProductFailure = (response) => {
   productLookupFailureMessage('Product Lookup Failed')
-  $('.product-lookup-table tbody').html('')
+  $('#product-lookup-display').html('')
 }
 
 const onInventoryIndexSuccess = (response) => {
@@ -113,8 +119,8 @@ const onInventoryIndexSuccess = (response) => {
   $('#product-lookup-status').text('')
   $('#product-lookup-div').hide()
   $('#inventory-lookup-div').show()
-  $('#product-lookup-id').val('')
-  $('.product-lookup-table tbody').html('')
+  $('#product-lookup-name').val('')
+  $('#product-lookup-display').html('')
   store.inventory = true
   $('.info-right').text('Click the "Products" button to add more items to your inventory, or click an item to update your existing inventory')
   $('#delete-inventory-form').show()
@@ -143,6 +149,9 @@ const onLookupInventoryFailure = (response) => {
 
 const onCreateInventorySuccess = (response) => {
   api.inventoryIndex().then(successMessage('Item Added to Inventory')).catch(onInventoryIndexFailure)
+  $('#product-lookup-status').text('')
+  $('#product-lookup-name').val('')
+  $('#product-lookup-display').html('')
 }
 
 const onCreateInventoryFailure = (response) => {
@@ -152,6 +161,10 @@ const onCreateInventoryFailure = (response) => {
 const onInventoryUpdateSuccess = (response) => {
   api.inventoryIndex().then(onInventoryIndexSuccess).catch(onInventoryIndexFailure)
   updateDeleteSuccessMessage('Update Successful')
+  $('#inventory-lookup-name').val('')
+  $('#inventory-lookup-display').html('')
+  $('#inventory-lookup-status').text('')
+  $('#product-lookup-status').text('')
 }
 
 const onInventoryUpdateFailure = (response) => {
@@ -163,6 +176,10 @@ const onInventoryDeleteSuccess = (response) => {
   $('#update-inventory-form-modal').trigger('reset')
   api.inventoryIndex().then(onInventoryIndexSuccess).catch(onInventoryIndexFailure)
   updateDeleteSuccessMessage('Deletion Successful')
+  $('#inventory-lookup-name').val('')
+  $('#inventory-lookup-display').html('')
+  $('#inventory-lookup-status').text('')
+  $('#product-lookup-status').text('')
 }
 
 const onInventoryDeleteFailure = (response) => {
