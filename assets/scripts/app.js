@@ -17,9 +17,9 @@ $(() => {
   $('#change-pw-form').on('submit', events.onChangePassword)
   $('.inventory-lookup-form').on('submit', events.onlookupInventory)
   $('.product-lookup-form').on('submit', events.onLookupProduct)
-  $('#change-pw-form').on('submit', events.onChangePassword)
   // Add Product modal
   $('#add-product-modal').on('show.bs.modal', event => {
+    $('#add-product-form-modal').trigger('reset')
     const productId = $(event.relatedTarget).attr('data-product-id')
     const productName = $(event.relatedTarget).attr('data-product-name')
     $('#add-product-modal .modal-title').text(productName)
@@ -28,6 +28,7 @@ $(() => {
   $('#add-product-form-modal').on('submit', events.onAddProductModal)
   // Update inventory modal
   $('#update-inventory-modal').on('show.bs.modal', event => {
+    $('#update-inventory-form-modal').trigger('reset')
     const inventoryId = $(event.relatedTarget).data('inventory-id')
     const productId = $(event.relatedTarget).data('product-id')
     const productName = $(event.relatedTarget).data('product-name')
@@ -38,4 +39,7 @@ $(() => {
   })
   $('#update-inventory-form-modal').on('submit', events.onUpdateInventoryModal)
   $('#delete-inventory-form-modal').on('submit', events.onDeleteInventoryModal)
+  $('#change-pw-modal').on('show.bs.modal', event => {
+    $('#change-pw-form').trigger('reset')
+  })
 })
