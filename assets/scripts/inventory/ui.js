@@ -210,8 +210,7 @@ const onSignInSuccess = (response) => {
   store.user = response.user
   $('#title').css('color', '#1175f7')
   $('#sign-in-form').trigger('reset')
-  $('.sign-out-div').css('visibility', 'visible')
-  $('.change-pw-div').css('visibility', 'visible')
+  $('.navbar').removeClass('d-none')
   $('.links').show()
   $('.table-div').show()
   $('#product-lookup-div').hide()
@@ -226,8 +225,7 @@ const onSignInFailure = (response) => {
 
 const onSignOutSuccess = (response) => {
   $('#title').css('color', '#b90641')
-  $('.sign-out-div').css('visibility', 'hidden')
-  $('.change-pw-div').css('visibility', 'hidden')
+  $('.navbar').addClass('d-none')
   $('.links').hide()
   $('.table-div').hide()
   $('.sign-in-up-div').show()
@@ -257,11 +255,19 @@ const onSignOutFailure = (response) => {
 const onChangePasswordSuccess = (response) => {
   changePwSuccessMessage('Password changed successfully')
   $('#change-pw-form').trigger('reset')
+  $('#change-pw-modal').modal('toggle')
+  setTimeout(function () {
+    changePwSuccessMessage('')
+  }, 5000)
 }
 
 const onChangePasswordFailure = (response) => {
   changePwFailureMessage('Password change failure')
   $('#change-pw-form').trigger('reset')
+  $('#change-pw-modal').modal('toggle')
+  setTimeout(function () {
+    changePwFailureMessage('')
+  }, 5000)
 }
 
 module.exports = {
